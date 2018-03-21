@@ -1,0 +1,44 @@
+.grid {
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 80px 34px auto 80px;
+    grid-template-areas:
+        "header header"
+        "sidebar searchbar"
+        "sidebar content"
+        "footer footer"
+}
+
+.header {
+    grid-area: header;
+    background-color: #ededed;
+    border: 1px solid #fafafa;
+    text-align: center;
+}
+
+.sidebar {
+    grid-area: sidebar;
+    text-align: center;
+}
+
+.searchbar {
+    grid-area: searchbar;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #ededed;
+    border: 1px solid #fafafa;
+}
+
+.content {
+    grid-area: content;
+    background-color: #ededed;
+    border: 1px solid #fafafa;
+}
+
+.footer {
+    text-align: center;
+    grid-area: footer;
+    background-color: black;
+    vertical-align: baseline;
+}

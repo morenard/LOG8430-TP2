@@ -1,0 +1,38 @@
+.input {
+    width: 80%;
+}
+
+.grid {
+    display: grid;
+    position: relative;
+    height: 100%;
+    grid-template-columns: auto;
+    grid-template-rows: 50px 1fr 70px;
+    grid-template-areas:
+        "header"
+        "items"
+        "create"
+}
+
+.header {
+    grid-area: header;
+    background-color: #ededed;
+    border: 1px solid #fafafa;
+}
+
+.items {
+    grid-area: items;
+    height: 100%;
+    overflow: scroll;
+    background-color: #ededed;
+    border: 1px solid #fafafa;
+}
+
+.create {
+    grid-area: create;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background-color: #ededed;
+    border: 1px solid #fafafa;
+}

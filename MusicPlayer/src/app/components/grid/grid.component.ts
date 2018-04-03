@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './grid.component.html',
   styleUrls: [
     './grid.component.css',
-    './../../../node_modules/primeng/resources/components/grid/grid.css']
+    './../../../../node_modules/primeng/resources/components/grid/grid.css']
 })
 export class GridComponent implements OnInit {
 

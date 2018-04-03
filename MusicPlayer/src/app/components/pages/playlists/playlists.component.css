@@ -21,6 +21,7 @@
     overflow: scroll;
     background-color: #ededed;
     border: 1px solid #fafafa;
+    margin-top: '50px';
 }
 
 #playlistName {

@@ -10,9 +10,6 @@ export class JamendoService {
 
   getSearchResults(query: string) {
     const requestUrl = `https://api.jamendo.com/v3.0/tracks/?client_id=${this.client_id}&format=jsonpretty&limit=2&speed=high+veryhigh&include=musicinfo&namesearch=${query}`;
-    // const requestUrl = `https://api.jamendo.com/v3.0/autocomplete/?client_id=${this.client_id}&format=jsonpretty&limit=10&prefix=${query}`;
-    // requestUrl += '&matchcount=1';
-    // console.log(requestUrl);
     return this.http.request(requestUrl);
   }
 

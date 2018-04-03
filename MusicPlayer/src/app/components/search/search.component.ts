@@ -1,15 +1,15 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AutoCompleteModule } from 'primeng/autocomplete';
-import { JamendoService } from '../services/jamendo.service';
-import { DeezerService } from '../services/deezer.service';
+import { JamendoService } from '../../services/jamendo.service';
 import { DeezerApiService } from 'angular-deezer-api';
-import { SharedDataService } from '../services/shared-data.service';
-import { Song } from '../interfaces/song';
+import { SharedDataService } from '../../services/shared-data.service';
+import { Song } from '../../interfaces/song';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./../../../node_modules/primeng/resources/components/autocomplete/autocomplete.css',
+  styleUrls: ['./../../../../node_modules/primeng/resources/components/autocomplete/autocomplete.css',
               './search.component.css'],
   encapsulation: ViewEncapsulation.None
 })
@@ -20,13 +20,12 @@ export class SearchComponent implements OnInit {
   tracks: any[];
   results: Song[];
   audio: any;
-
   selectedSong: Song;
 
   constructor(private jamendoService: JamendoService,
     private deezerService: DeezerApiService,
-    private deezerBadService: DeezerService,
-    private sharedData: SharedDataService) {
+    private sharedData: SharedDataService,
+    private router: Router) {
   }
 
   ngOnInit() {
@@ -35,7 +34,10 @@ export class SearchComponent implements OnInit {
 
   onClick(value) {
     this.sharedData.changeCurrentSong(value);
+    this.router.navigateByUrl('/songs');
 
+    // reload playlists list
+    this.sharedData.updatePlaylistsList();
   }
 
   search(event) {
@@ -49,11 +51,12 @@ export class SearchComponent implements OnInit {
   fetchJamendoResults(query: string) {
     this.jamendoService.getSearchResults(query).subscribe((data) => {
       const list: Song[] = [];
-      console.log(data.json());
       if (data.json().results) {
         for (let i = 0; i < data.json().results.length; i++) {
           const song: Song = {  title: data.json().results[i].name,
-                                source: 'JAMENDO',
+                                author: data.json().results[i].artist_name,
+                                album: data.json().results[i].album_name,
+                                source: 'Jamendo',
                                 id: data.json().results[i].id,
                                 audioSrc: data.json().results[i].audio
                               };
@@ -67,15 +70,16 @@ export class SearchComponent implements OnInit {
   fetchDeezerResults(query: string) {
     this.deezerService.search(query).then(data => {
       if (data.data.length !== 0) {
-        // console.log(data.data);
         // Limit search results to 10, doesn't seem to work when limiting with the request
         const LIMIT = 10;
         const list: Song[] = [];
 
         for (let i = 0; i < LIMIT; i++) {
           const song: Song = {  title: data.data[i].title,
+                                author: data.data[i].artist.name,
+                                album: data.data[i].album.title,
                                 id: data.data[i].id,
-                                source: 'DEEZER',
+                                source: 'Deezer',
                                 audioSrc: data.data[i].preview};
           list.push(song);
         }

@@ -4,14 +4,14 @@
   </div>
 
   <div class="items">
-    <p-panelMenu [model]="items" [multiple]="false" (click)="onClick()"></p-panelMenu>
+    <p-panelMenu [model]="items" [multiple]="false" (click)="selectPlaylist($event)"></p-panelMenu>
   </div>
 
   <div class="create">
     <form>
       <br />
       <input id="newplaylist" class="input" type="text" pInputText placeholder="New playlist..."/>
-      <button id="create" type="button" (click)="addItem()" pButton label="Create"></button>
+      <button id="create" type="button" (click)="addPlaylist()" pButton label="Create"></button>
     </form>
   </div>
 </div>

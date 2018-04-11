@@ -1,0 +1,11 @@
+.my-autocomplete .ui-autocomplete {
+    width: 100%;
+    height: 300px;
+    display: block;
+    margin: 0 auto;
+}
+
+.info-box { 
+    display: block; 
+    position: relative;
+}

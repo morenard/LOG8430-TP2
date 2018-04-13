@@ -34,7 +34,7 @@ export class PlaylistsComponent implements OnInit {
 
   ngOnInit() {
     this.sharedData.currentPlaylist.subscribe(selectedPlaylist => this.updateNodes(selectedPlaylist));
-    this.sharedData.playing.subscribe(onPlay => this.playing = onPlay);
+    this.sharedData.playing.subscribe((onPlay) => { this.playing = onPlay; });
   }
 
   // update nodes --> songs of the playlist
@@ -72,7 +72,6 @@ export class PlaylistsComponent implements OnInit {
       // play first correspondance (song)
       this.sharedData.changeCurrentSong(found[0]);
       this.sharedData.play();
-      this.playing = true;
     }
   }
 }

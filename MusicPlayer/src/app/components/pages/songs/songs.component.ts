@@ -28,6 +28,9 @@ export class SongsComponent implements OnInit {
   selectedSong: Song;
   toggle: Function;
 
+  // indicates if a song is currently on play
+  playing: boolean;
+
 
   constructor(
     private sharedData: SharedDataService
@@ -36,9 +39,21 @@ export class SongsComponent implements OnInit {
   ngOnInit() {
     this.sharedData.currentSong.subscribe(initialSelectedSong => this.selectedSong = initialSelectedSong);
     this.sharedData.observableList.subscribe(allPlaylists => this.playlists = this.convertToItem(allPlaylists));
+    this.sharedData.playing.subscribe((onPlay) => { this.playing = onPlay; });
 
     // reload playlists list
     this.sharedData.updatePlaylistsList();
+  }
+
+  // play song
+  onPlay() {
+    // if a song is already playing, we need to pause it first
+    if (this.playing) {
+      this.sharedData.play();
+    }
+
+    // play the song
+    this.sharedData.play();
   }
 
   // allow to convert from string[] to selectItem[] to be able to display data

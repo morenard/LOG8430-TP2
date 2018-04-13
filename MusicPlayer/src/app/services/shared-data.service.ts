@@ -25,7 +25,7 @@ export class SharedDataService {
   private togglePlayPause = new Subject<any>();
   toggle = this.togglePlayPause.asObservable();
 
-  private songPlaying = new Subject<boolean>();
+  private songPlaying = new BehaviorSubject<boolean>(false);
   playing = this.songPlaying.asObservable();
 
   // manage 'database' of playlists (no one has access to this)
@@ -46,11 +46,10 @@ export class SharedDataService {
 
   play() {
     this.togglePlayPause.next();
-    this.updatePlay();
   }
 
-  updatePlay() {
-    this.songPlaying.next(!this.songPlaying);
+  updatePlay(value: boolean) {
+    this.songPlaying.next(value);
   }
 
   // methods to update display

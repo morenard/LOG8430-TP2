@@ -11,6 +11,10 @@
   </div>
 
   <div>
+    <button pButton type="button" label="Play" (click)="onPlay($event)"></button>
+  </div>
+  
+  <div>
     <p-dropdown [options]="playlists" [(ngModel)]="selectedPlaylist" placeholder="Select a playlist"></p-dropdown>
     <button pButton type="button" label="Add to playlist" (click)="addSongToPlaylist()"></button>
     <p-messages [(value)]="message"></p-messages>

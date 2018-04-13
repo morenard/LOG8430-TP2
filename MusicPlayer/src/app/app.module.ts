@@ -14,10 +14,11 @@ import { DropdownModule } from 'primeng/dropdown';
 import { TreeTableModule } from 'primeng/treetable';
 import { MessagesModule } from 'primeng/messages';
 
-import { JamendoService } from './services/jamendo.service';
 import { SharedDataService } from './services/shared-data.service';
-
+import { JamendoService } from './services/jamendo.service';
 import { DeezerApiModule } from 'angular-deezer-api';
+import { DeezerService } from './services/deezer.service';
+import { SpotifyService } from './services/spotify.service';
 
 import { AppComponent } from './app.component';
 import { SearchComponent } from './components/search/search.component';
@@ -57,8 +58,10 @@ const appRoutes: Routes = [
     RouterModule.forRoot( appRoutes )
   ],
   providers: [
+    SharedDataService,
     JamendoService,
-    SharedDataService
+    DeezerService,
+    SpotifyService
   ],
   bootstrap: [AppComponent]
 })

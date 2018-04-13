@@ -6,12 +6,14 @@
   <div>
     <p><strong>Artist: </strong>{{selectedSong.author}}</p>
     <p><strong>Album: </strong>{{selectedSong.album}}</p>
+    <p><strong>Release date: </strong>{{selectedSong.releasedate}}</p>
     <p><strong>Source API: </strong>{{selectedSong.source}}</p>
   </div>
 
   <div>
     <button pButton type="button" label="Play" (click)="onPlay($event)"></button>
   </div>
+  
   <div>
     <p-dropdown [options]="playlists" [(ngModel)]="selectedPlaylist" placeholder="Select a playlist"></p-dropdown>
     <button pButton type="button" label="Add to playlist" (click)="addSongToPlaylist()"></button>

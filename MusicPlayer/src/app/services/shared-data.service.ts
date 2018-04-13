@@ -9,23 +9,20 @@ import { Playlist } from '../interfaces/playlist';
 export class SharedDataService {
 
   // manage song lecture
-  d = new Date();
   private song = new BehaviorSubject<Song> ({
       title: '...',
       author: '...',
       album: '...',
       id: 0,
       source: '...',
-      audioSrc: '...',
-      releasedate: '...'
-    }
+      audioSrc: '...'}
   );
   currentSong = this.song.asObservable();
 
   private togglePlayPause = new Subject<any>();
   toggle = this.togglePlayPause.asObservable();
 
-  private songPlaying = new BehaviorSubject<boolean>(false);
+  private songPlaying = new Subject<boolean>();
   playing = this.songPlaying.asObservable();
 
   // manage 'database' of playlists (no one has access to this)
@@ -46,10 +43,11 @@ export class SharedDataService {
 
   play() {
     this.togglePlayPause.next();
+    this.updatePlay();
   }
 
-  updatePlay(value: boolean) {
-    this.songPlaying.next(value);
+  updatePlay() {
+    this.songPlaying.next(!this.songPlaying);
   }
 
   // methods to update display

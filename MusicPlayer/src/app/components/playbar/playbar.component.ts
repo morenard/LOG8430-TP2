@@ -29,6 +29,10 @@ export class PlaybarComponent implements OnInit {
 
   toggle() {
     if (this.selectedSong.source !== '...') {
+
+      // to change value of variables 'toggle' and 'playing'
+      this.sharedData.updatePlay();
+
       if (this.isStopped) {
         console.log('Playing ' + this.selectedSong.title);
         this.audio.src = this.selectedSong.audioSrc;
@@ -41,18 +45,11 @@ export class PlaybarComponent implements OnInit {
         this.audio.play();
         this.isStopped = false;
         this.buttonImagePlayPause = 'fa fa-pause';
-
-        // to change value of 'playing'
-        this.sharedData.updatePlay(true);
-
       } else {
         console.log('Pausing ' + this.selectedSong.title);
         this.audio.pause();
         this.isStopped = true;
         this.buttonImagePlayPause = 'fa fa-play';
-
-        // to change value of 'playing'
-        this.sharedData.updatePlay(false);
       }
     }
   }
